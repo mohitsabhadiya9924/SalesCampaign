@@ -77,6 +77,7 @@ public class CampaignApplying {
 
         for (Object[] objects : list) {
             SaleCampaign campaign = campaignRepository.findById((int)objects[0]).get();
+            campaign.setStatus("Past Campaign");
             for (CampaignDiscount discount : campaign.getCampaignDiscounts()){
                 History history = historyRepository.findHistory(discount.getProductId().getpId(),campaign.getStartDate());
                 Product product = productRepository.findById(discount.getProductId().getpId()).get();

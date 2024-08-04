@@ -43,6 +43,7 @@ public class ServiceForCampaignApply {
     @Transactional
     @Async
     private void applyCampaign(SaleCampaign saleCampaign) {
+        saleCampaign.setStatus("Current Campaign");
         List<CampaignDiscount> campaignDiscounts = saleCampaign.getCampaignDiscounts();
         List<Product> products = campaignDiscounts.stream()
                 .map(campaignDiscount -> productRepository.findById(campaignDiscount.getProductId().getpId()).orElse(null))
