@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,10 +26,22 @@ public class CampaignServices {
     // Add Campaign
     public ResponseEntity<?> addCampaign(SaleCampaign saleCampaigns) {
         try {
-            List<CampaignDiscount> saleCampaigns1 = saleCampaigns.getCampaignDiscounts();
-            for (CampaignDiscount campaignDiscount : saleCampaigns1) {
+            List<CampaignDiscount> campaignDiscounts = saleCampaigns.getCampaignDiscounts();
+            for (CampaignDiscount campaignDiscount : campaignDiscounts) {
                 campaignDiscount.setSaleCampaign(saleCampaigns);
             }
+
+            LocalDate date = saleCampaigns.getStartDate().toLocalDate();
+            if (LocalDate.now().isEqual(date) == (LocalDate.now().isAfter(date) && LocalDate.now().isBefore(date))) {
+                saleCampaigns.setStatus("Current Campaign");
+            }
+            else if (LocalDate.now().isBefore(date)) {
+                saleCampaigns.setStatus("Past Campaign");
+            }
+            else {
+                saleCampaigns.setStatus("Upcoming Campaign");
+            }
+
             return new ResponseEntity<>(campaignRepository.save(saleCampaigns), HttpStatus.CREATED);
         }catch (Exception e) {
             e.printStackTrace();

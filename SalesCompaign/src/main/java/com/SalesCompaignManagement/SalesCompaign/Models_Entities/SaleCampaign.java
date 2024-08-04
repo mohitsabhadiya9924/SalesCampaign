@@ -21,16 +21,27 @@ public class SaleCampaign {
     private String title;
     @OneToMany(mappedBy = "saleCampaign",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CampaignDiscount> campaignDiscounts;
+    @Column(name = "status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public SaleCampaign() {
     }
 
-    public SaleCampaign(int campaignId, Date startDate, Date endDate, String title, List<CampaignDiscount> campaignDiscounts) {
+    public SaleCampaign(int campaignId, Date startDate, Date endDate, String title, List<CampaignDiscount> campaignDiscounts,String status) {
         this.campaignId = campaignId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;
         this.campaignDiscounts = campaignDiscounts;
+        this.status = status;
     }
 
     public int getCampaignId() {

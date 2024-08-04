@@ -35,7 +35,6 @@ public class ProductServices {
         return new ResponseEntity<>("Entry Failed", HttpStatus.BAD_REQUEST);
     }
 
-
     // Get All Data
     public ResponseEntity<?> getAllProducts(){
         try {
