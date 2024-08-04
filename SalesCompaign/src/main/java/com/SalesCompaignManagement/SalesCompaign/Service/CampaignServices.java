@@ -30,16 +30,30 @@ public class CampaignServices {
             for (CampaignDiscount campaignDiscount : campaignDiscounts) {
                 campaignDiscount.setSaleCampaign(saleCampaigns);
             }
+//            LocalDate startDate = saleCampaign.getStartDate();
+//            LocalDate endDate = saleCampaign.getEndDate();
+//            LocalDate todayDate = LocalDate.now();
+//
+//            if (todayDate.isEqual(startDate) || (todayDate.isAfter(startDate) && todayDate.isBefore(endDate))){
+//                saleCampaign.setStatus("Current Campaign");
+//            }
+//            else if (todayDate.isBefore(startDate)){
+//                saleCampaign.setStatus("Upcoming Campaign");
+//            }
+//            else if (todayDate.isAfter(endDate)){
+//                saleCampaign.setStatus("Past Campaign");
+//            }
+            LocalDate startDate = saleCampaigns.getStartDate().toLocalDate();
+            LocalDate endDate = saleCampaigns.getEndDate().toLocalDate();
 
-            LocalDate date = saleCampaigns.getStartDate().toLocalDate();
-            if (LocalDate.now().isEqual(date) == (LocalDate.now().isAfter(date) && LocalDate.now().isBefore(date))) {
+            if (LocalDate.now().isEqual(startDate) == (LocalDate.now().isAfter(startDate) && LocalDate.now().isBefore(endDate))) {
                 saleCampaigns.setStatus("Current Campaign");
             }
-            else if (LocalDate.now().isBefore(date)) {
-                saleCampaigns.setStatus("Past Campaign");
-            }
-            else {
+            else if (LocalDate.now().isBefore(startDate)) {
                 saleCampaigns.setStatus("Upcoming Campaign");
+            }
+            else if (LocalDate.now().isAfter(endDate)) {
+                saleCampaigns.setStatus("Past Campaign");
             }
 
             return new ResponseEntity<>(campaignRepository.save(saleCampaigns), HttpStatus.CREATED);
@@ -72,7 +86,6 @@ public class CampaignServices {
         }
         return new ResponseEntity<>("Not Found",HttpStatus.NOT_FOUND);
     }
-
 
 
 //    @Scheduled(cron = "* * * * * *")

@@ -70,14 +70,18 @@ public class CampaignApplying {
         System.out.println(new java.util.Date());
     }
 
-    @Scheduled(cron = "0 50 17 20 06 *")
+    @Scheduled(cron = "59 59 23 05 08 *")
     public void closeCampaign() {
         System.out.println("Campaign Closed");
         List<Object[]> list = campaignRepository.getAllCampaignEnds();
 
         for (Object[] objects : list) {
             SaleCampaign campaign = campaignRepository.findById((int)objects[0]).get();
+            System.out.println(campaign.getStatus());
             campaign.setStatus("Past Campaign");
+            System.out.println(campaign.getStatus());
+
+
             for (CampaignDiscount discount : campaign.getCampaignDiscounts()){
                 History history = historyRepository.findHistory(discount.getProductId().getpId(),campaign.getStartDate());
                 Product product = productRepository.findById(discount.getProductId().getpId()).get();
@@ -98,6 +102,7 @@ public class CampaignApplying {
 
                 productRepository.save(product);
                 historyRepository.save(newHistory);
+//                campaignRepository.save(campaign);
             }
         }
     }
