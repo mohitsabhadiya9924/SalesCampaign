@@ -36,8 +36,8 @@ public class CampaignApplying {
         // Code 1 :-
 
 //        List<Object[]> list=campaignRepository.getAllCampaignDiscount();
-//
-//        for(Object[] objects:list){
+
+//        for(Object[] objects : list){
 //            SaleCampaign campaign=campaignRepository.findById((int)objects[0]).get();
 //            for(CampaignDiscount campaignDiscount:campaign.getCampaignDiscounts()) {
 //                Product product = productRepository.findById(campaignDiscount.getProductId().getpId()).get();

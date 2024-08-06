@@ -30,19 +30,7 @@ public class CampaignServices {
             for (CampaignDiscount campaignDiscount : campaignDiscounts) {
                 campaignDiscount.setSaleCampaign(saleCampaigns);
             }
-//            LocalDate startDate = saleCampaign.getStartDate();
-//            LocalDate endDate = saleCampaign.getEndDate();
-//            LocalDate todayDate = LocalDate.now();
-//
-//            if (todayDate.isEqual(startDate) || (todayDate.isAfter(startDate) && todayDate.isBefore(endDate))){
-//                saleCampaign.setStatus("Current Campaign");
-//            }
-//            else if (todayDate.isBefore(startDate)){
-//                saleCampaign.setStatus("Upcoming Campaign");
-//            }
-//            else if (todayDate.isAfter(endDate)){
-//                saleCampaign.setStatus("Past Campaign");
-//            }
+
             LocalDate startDate = saleCampaigns.getStartDate().toLocalDate();
             LocalDate endDate = saleCampaigns.getEndDate().toLocalDate();
 
@@ -87,9 +75,4 @@ public class CampaignServices {
         return new ResponseEntity<>("Not Found",HttpStatus.NOT_FOUND);
     }
 
-
-//    @Scheduled(cron = "* * * * * *")
-//    public static void print() {
-//        System.out.println(new Date());
-//    }
 }

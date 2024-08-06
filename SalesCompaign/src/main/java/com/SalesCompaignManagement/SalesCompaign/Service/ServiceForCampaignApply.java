@@ -32,11 +32,17 @@ public class ServiceForCampaignApply {
     @Transactional
     public void applyCampaigns() {
         List<Object[]> campaignsDiscount = campaignRepository.getAllCampaignDiscount();
-        List<SaleCampaign> campaigns = campaignsDiscount
-                .stream().map(objects -> campaignRepository.findById((int)objects[0]).orElse(null))
+        List<Integer> cidList = campaignRepository.getAllCampaignsStart();
+
+//        List<SaleCampaign> campaigns = campaignsDiscount
+//                .stream().map(objects -> campaignRepository.findById((int)objects[0]).orElse(null))
+//                .filter(saleCampaign -> saleCampaign!=null)
+//                .toList();
+
+        List<SaleCampaign> campaigns = cidList
+                .stream().map(objects -> campaignRepository.findById(objects).orElse(null))
                 .filter(saleCampaign -> saleCampaign!=null)
                 .toList();
-
         campaigns.forEach(this::applyCampaign);
     }
 
