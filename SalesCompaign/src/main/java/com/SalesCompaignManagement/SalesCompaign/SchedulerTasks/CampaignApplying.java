@@ -28,7 +28,7 @@ public class CampaignApplying {
     @Autowired
     ServiceForCampaignApply serviceForCampaignApply;
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 37 15 * * *")
     public void startCampaign() {
         System.out.println("Campaign Start");
         System.out.println(new java.util.Date());
