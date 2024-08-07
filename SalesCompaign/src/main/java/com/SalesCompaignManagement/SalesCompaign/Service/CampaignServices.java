@@ -46,7 +46,7 @@ public class CampaignServices {
             LocalDate startDate = saleCampaigns.getStartDate().toLocalDate();
             LocalDate endDate = saleCampaigns.getEndDate().toLocalDate();
 
-            if (LocalDate.now().isEqual(startDate) == (LocalDate.now().isAfter(startDate) && LocalDate.now().isBefore(endDate))) {
+            if (LocalDate.now().isEqual(startDate) || (LocalDate.now().isAfter(startDate) && LocalDate.now().isBefore(endDate))) {
                 saleCampaigns.setStatus("Current Campaign");
             }
             else if (LocalDate.now().isBefore(startDate)) {
