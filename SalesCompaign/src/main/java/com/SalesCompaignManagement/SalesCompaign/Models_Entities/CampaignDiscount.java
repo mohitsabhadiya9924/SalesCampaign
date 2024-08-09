@@ -1,9 +1,7 @@
 package com.SalesCompaignManagement.SalesCompaign.Models_Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "tbl_campaign_discount")
@@ -22,6 +20,7 @@ public class CampaignDiscount {
 
    @ManyToOne
    @JoinColumn(name = "c_id")
+   @JsonBackReference
    private SaleCampaign saleCampaign;
 
     public CampaignDiscount() {

@@ -1,5 +1,6 @@
 package com.SalesCompaignManagement.SalesCompaign.Models_Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class SaleCampaign {
     @Column(name = "title")
     private String title;
     @OneToMany(mappedBy = "saleCampaign",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<CampaignDiscount> campaignDiscounts;
     @Column(name = "status")
     private String status;
